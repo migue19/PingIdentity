@@ -15,7 +15,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var logoutButton: UIButton!
-    
+    @IBOutlet weak var userInfoLabel: UILabel!
+    @IBOutlet weak var infoTextField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -62,6 +64,7 @@ class LoginViewController: UIViewController {
                             textField.placeholder = nameCallback.prompt
                             textField.autocorrectionType = .no
                             textField.autocapitalizationType = .none
+                            textField.text = "mmexicano"
                         }
                         
                     }
@@ -71,6 +74,7 @@ class LoginViewController: UIViewController {
                             textField.isSecureTextEntry = true
                             textField.autocorrectionType = .no
                             textField.autocapitalizationType = .none
+                            textField.text = "Ch4ng31t123$"
                         }
                     }
                     else if let choiceCallback = callback as? ChoiceCallback {
@@ -199,14 +203,33 @@ class LoginViewController: UIViewController {
     
     @IBAction func logoutButtonPressed(_ sender: UIButton) {
         print("Logout button is pressed")
-        
+        print(FRUser.currentUser)
         FRUser.currentUser?.logout()
-        
         DispatchQueue.main.async {
             self.updateStatus()
         }
     }
-    
+
+    @IBAction func open(_ sender: UIButton) {
+        let url = URL(string: "frauth://com.forgerock.ios.frexample?code=test-code&state=test-state")!
+        print(UIApplication.shared.canOpenURL(url))
+        UIApplication.shared.open(url)
+    }
+
+    @IBAction func userInfo(_ sender: UIButton) {
+        guard FRUser.currentUser != nil else { return }
+
+        FRUser.currentUser?.getUserInfo { result, error in
+            guard let currentUserInfo = result else { return }
+            DispatchQueue.main.async {
+                self.userInfoLabel.text = "\(currentUserInfo.givenName ?? "-") \(currentUserInfo.familyName ?? "-")"
+            }
+        }
+
+        infoTextField.text = FRUser.currentUser?.token?.value
+
+    }
+
 }
 
 extension LoginViewController: PlatformAuthenticatorRegistrationDelegate {
