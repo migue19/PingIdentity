@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>forgerock_oauth_client_id</key>
-	<string>sdk-test</string>
+	<string>android-quickstart</string>
 	<key>forgerock_oauth_redirect_uri</key>
-	<string>org.forgerock.quickstart://callback</string>
+	<string>frauth://com.forgerock.ios.frexample</string>
 	<key>forgerock_oauth_scope</key>
 	<string>openid profile address email phone</string>
 	<key>forgerock_oauth_threshold</key>
 	<string>30</string>
 	<key>forgerock_url</key>
-	<string>https://heimdall.compartamos.com.mx:443/am</string>
+	<string>https://semipermeable-melinda-compliantly.ngrok-free.dev/openam</string>
 	<key>forgerock_cookie_name</key>
 	<string>iPlanetDirectoryPro</string>
 	<key>forgerock_realm</key>
-	<string>ClientesBanco</string>
+	<string>oidcidp</string>
 	<key>forgerock_timeout</key>
 	<string>30</string>
 	<key>forgerock_auth_service_name</key>
-	<string>arbolPrueba</string>
+	<string>sdkUsernamePasswordJourney</string>
 	<key>forgerock_registration_service_name</key>
 	<string>Registration Tree</string>
 	<key>forgerock_enable_par</key>
